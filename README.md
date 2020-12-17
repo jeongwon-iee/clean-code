@@ -1,7 +1,7 @@
 # ✨ Clean Code ✨
 ### 🔖 Index
 
-[1장 | 깨끗한 코드](https://www.notion.so/1-ea9e4e1f63b249d89666b537544fe009)
+[1장 | 깨끗한 코드](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.01)
 
 [2장 | 의미 있는 이름](https://www.notion.so/2-a2e328e99a074937b0866b0f961a3c12)
 
