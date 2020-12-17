@@ -3,7 +3,7 @@
 
 - [1장 | 깨끗한 코드](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.01)
 - [2장 | 의미 있는 이름](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.02)
-- [3장 | 함수](https://www.notion.so/3-6b0c1ea00b0a47ee8f8a00a66e8504a8)
+- [3장 | 함수](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.03)
 - [4장 | 주석](https://www.notion.so/4-553f94667fc74d339384e3f03490c321)
 - [5장 | 형식 맞추기](https://www.notion.so/5-9762522870014c728f14965d4980877a)
 - [6장 | 객체와 자료 구조](https://www.notion.so/6-0980e4befb974b0cb9d901276fb6abfc)
