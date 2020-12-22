@@ -9,6 +9,8 @@
 - 코드 논리를 흩뜨리지 않고서 오류 처리를 완벽하게 구현하는 방법
 - 단위 테스트와 테스트 주도 개발ㅇ르 적용하는 방법
 
+---
+
 ### 🔖 Index
 
 - [1장 | 깨끗한 코드](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.01)
@@ -28,6 +30,8 @@
 - [15장 | JUnit 들여다 보기](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.15)
 - [16장 | SerialDate 리팩터링](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.16)
 - [17장 | 냄새와 휴리스틱](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.17)
+
+---
 
 ### Clean Code 
 나쁜 코드도 돌아는 간다. 하지만 코드가 깨끗하지 못 하면 개발 조직은 기어간다. 매년 지저분한 코드로 수많은 시간과 상당한 자원이 낭비된다. 그래야 할 이유가 없다.
