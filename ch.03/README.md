@@ -181,3 +181,8 @@ ex) `write(name)`
 - 함수 이름에 인수에 관한 키워드를 추가하라.  
 ex) `write(name)` → `writeField(name)`,  
 `assertEquals()` → `assertExpectedEqualsActual(expected, actual)`
+
+##
+
+### 📘 부수 효과를 일으키지 마라!
+
