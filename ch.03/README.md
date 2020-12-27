@@ -30,7 +30,7 @@ public static String renderPageWithSetupsAndTeardowns(
 }
 ```
 
-한 가지 작업만 하는 함수는 자연스럽게 섹션으로 나누기 어렵다.
+: 한 가지 작업만 하는 함수는 자연스럽게 섹션으로 나누기 어렵다.
 
 ##
 
