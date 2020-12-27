@@ -153,7 +153,7 @@ ex) `void includeSetupPageInto(StringBuffer pateText)` (X) 변환 함수에서 �
 
 *해결* `writeField` 메서드를 outputStream 클래스 구성원으로 만들어 `ouputstream.writeFiled(name)`으로 호출한다. 아니면 outputStream을 현재 클래스 구성원 변수로 만들어 인수로 넘기지 않는다.
 
-좋은 예) `Point p = new Point(0,0);`
+좋은 예) `Point p = new Point(0,0);`  
 인수 2개가 한 값을 표현하는 두 요소이고, 그 순서가 자연적인 경우 이항 인수는 적절하다.
 
 
