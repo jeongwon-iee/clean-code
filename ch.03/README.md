@@ -44,6 +44,65 @@ public static String renderPageWithSetupsAndTeardowns(
 
 - **Switch문**
 
-: 
+: 본질적으로 switch문은 N가지를 처리하지만, 각 switch문을 저차원 클래스에 숨기고 절대로 반복하지 않는 방법이 있다. 다형성(polymorphism)을 이용한 방법이다.
+
+```java
+public Money calculatePay(Employee e) thorws InvalidEmployeeType {
+	switch(e.type) {
+		case COMMISIONED:
+			return calculateCommissionedPay(e);
+		case HOURLY:
+			return calculateHourlyPay(e);
+		case SALARIED:
+			return calculateSalariedPay(e);
+		default:
+			throw new InvalidEmployeeType(e.type);
+	}
+}
+```
+
+위 함수의 문제점
+
+1. 함수가 너무 길다. (새 직원 유형을 추가하면 더 길어진다.)
+2. '한 가지' 작업만 수행하지 않는다.
+3. SRP(Single Responsibility Principle)을 위반한다.
+4. OCP(Open Closed Principle)을 위반한다. (새 직원 유형을 추가할 때마다 코드를 변경 해야 한다.)
+5. *위 함수와 구조가 동일한 함수가 무한정 존재한다.*
+Ex. `isPayday(Employee e, Date date)`, `deliverPay(Employee e, Money pay)`
+
+*해결 - 추상 팩터리에 switch문 꽁꽁 숨기기*
+
+추상 팩토리에 switch문을 숨기고, 팩토리는 switch 문을 사용해 적절한 Employee 파생 클래스의 인스턴스를 생성한다. `calculatePay`, `isPayday`, `deliverPay`등과 같은 함수는 Employee 인터페이스를 거쳐 호출 된다. 그러면 다형성으로 인해 실제 파생 클래스의 함수가 실행 된다.
+
+```java
+public abstract class Employee {
+	public abstract boolean isPayday();
+	public abstract Money calculatePay();
+	public abstract void deliverPay(Money pay);
+}
+-----
+public interface EmployeeFactory {
+	public Employee make Employee(EmployeeRecord r) throws InvalidEmployeeType;
+}
+-----
+public class EmployeeFactoryImpl implements EmployeeFactory {
+	public Employee makeEmployee(EmployeeRecord r) throws InvalidEmployeeType {
+		switch(r.type) {
+			case COMMISIONED:
+				return new CommissionedEmployee(r);
+			case HOURLY:
+				return new HourlyEmployee(r);
+			case SALARIED:
+				return new SalariedEmployee(r);
+			default:
+				throw new InvalidEmployeeType(r.type); 
+		}
+	}
+}
+```
+
+### 📘 서술적인 이름을 사용하라!
+
+> "코드를 읽으면서 짐작했던 기능을 각 루틴이 그대로 수행한다면 깨끗한 코드라 불러도 되겠다."
 
 
