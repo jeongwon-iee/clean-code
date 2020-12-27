@@ -186,3 +186,31 @@ ex) `write(name)` → `writeField(name)`,
 
 ### 📘 부수 효과를 일으키지 마라!
 
+- 예상치 못한 부수 효과는 시간적인 결합, 순서 종속성을 초래하게 된다.  
+- 함수는 한 가지 기능만 하도록 작성하라.
+
+나쁜 예)
+
+```java
+public class UserValidator {
+	private Cryptographer crytoprahpher; 
+	
+	public boolean checkPassword(String userName, String password) {
+		User user = UserGateway.findByName(userName);
+		if (user != User.NULL) {
+			String codedPrase = user.getPhraseEncoededByPassword();
+			String phrase = crytoprahpher.decrypt(codedPhrase, password);
+			if("Valid Password".equals(phrase)) {
+				Session.initialize();
+				return true;
+			}
+		}
+		return false;
+	}	
+}
+```
+
+`checkPassword`는 이름 그대로 암호 확인만 해야한다. 이름만 봐서는 세션을 초기화한다는 사실이 드러나지 않는다. 함수가 일으키는 부수효과는 `Session.initialize();` 호출이다. 그래서 함수 이름만 보고 함수를 호출하는 사용자는 사용자를 인증하면서 기존 세션 정보를 지워버릴 위험에 처한다.
+
+*해결*  `checkPasswordAndInitializeSession` 이라는 이름이 더 좋다. 함수가 두 가지 일을 하긴 하지만.
+
