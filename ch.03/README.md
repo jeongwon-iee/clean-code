@@ -151,12 +151,9 @@ ex) `void includeSetupPageInto(StringBuffer pateText)` (X) 변환 함수에서 �
 > 잠시 주춤하며 첫 인수를 무시해야 한다는 사실을 깨닫는다. 그리고 바로 그 사실이 결국 문제를 일으킨다.  
 왜냐고? 어떤 코드든 절대로 무시하면 안 된다. 무시한 코드에 오류가 숨어드니까.
 
-*해결*
-
-`writeField` 메서드를 outputStream 클래스 구성원으로 만들어 `ouputstream.writeFiled(name)`으로 호출한다. 아니면 outputStream을 현재 클래스 구성원 변수로 만들어 인수로 넘기지 않는다.
+*해결* `writeField` 메서드를 outputStream 클래스 구성원으로 만들어 `ouputstream.writeFiled(name)`으로 호출한다. 아니면 outputStream을 현재 클래스 구성원 변수로 만들어 인수로 넘기지 않는다.
 
 좋은 예) `Point p = new Point(0,0);`
-
 인수 2개가 한 값을 표현하는 두 요소이고, 그 순서가 자연적인 경우 이항 인수는 적절하다.
 
 
