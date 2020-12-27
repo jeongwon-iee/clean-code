@@ -125,26 +125,23 @@ ex) `includeSetupAndTeardownPages`, `includeSetupPages`, `includeTeardownPages`
 
 최선은 인수가 없는 경우이며, 차선은 입력 인수가 1개뿐인 경우다.
 
-**단항 형식**
+**단항 함수**
 
-함수에 인수 1개를 넘기는 이유로 가장 흔한 경우는 두 가지이다.
-
-1. 인수에게 질문을 던지는 경우  
+- 인수에게 질문을 던지는 경우  
 `boolean fileExists("MyFile")`
-2. 인수를 뭔가로 변환해 결과를 반환하는 경우  
+- 인수를 뭔가로 변환해 결과를 반환하는 경우  
 `InputStream fileOpen("MyFile")`
-3. 이벤트 (입력 인수로 시스템 상태를 바꾸는 경우)  
+- 이벤트 (입력 인수로 시스템 상태를 바꾸는 경우)  
 `passwordAttemptFailedNtimes(int attempts)`
 
-위의 경우가 아니라면 단항 함수는 가급적 피한다.
-
+위의 경우가 아니라면 단항 함수는 가급적 피한다.  
 나쁜 예) `void includeSetupPageInto(StringBuffer pateText)` 변환 함수에서 출력 인수를 사용
 
 **플래그 인수**
 
 > 함수로 `boolean`값을 넘기는 것은 함수가 한꺼번에 여러 가지를 처리한다고 대놓고 공표하는 셈이다.
 
-각 플래그 값에 따라 별도의 함수를 작성하라.  
+- 각 플래그 값에 따라 별도의 함수를 작성하라.  
 ex) `render(boolean isSuite)` → `renderForSuite()` & `renderForSingleTest()`
 
 
@@ -169,3 +166,18 @@ ex) `render(boolean isSuite)` → `renderForSuite()` & `renderForSingleTest()`
 나쁜 예) `assertEquals(message, expected, actual)`  
 좋은 예) `assertEquals(1.0, amount, .001)`
 
+**인수 객체**
+
+> 인수가 2-3개 필요하다면 일부를 독자적인 클래스 변수로 선언할 가능성을 짚어 본다.  
+
+`Circle makeCircle(double x, double y, double radius);` 
+→ `Circle makeCircle(Point center, double radius);`
+
+**동사와 키워드** 
+
+- 단항 함수는 함수와 인수가 동사/명사 쌍을 이뤄야 한다.  
+ex) `write(name)`
+
+- 함수 이름에 인수에 관한 키워드를 추가하라.  
+ex) `write(name)` → `writeField(name)`,  
+`assertEquals()` → `assertExpectedEqualsActual(expected, actual)`
