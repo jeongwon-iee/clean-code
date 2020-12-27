@@ -214,3 +214,13 @@ public class UserValidator {
 
 *해결*  `checkPasswordAndInitializeSession` 이라는 이름이 더 좋다. 함수가 두 가지 일을 하긴 하지만.
  
+**출력 인수**
+
+> 일반적으로 출력 인수는 피해야 한다. 함수에서 상태를 변경해야 한다면, 함수가 속한 객체 상태를 변경하는 방식을 택한다.
+
+나쁜 예) `appendFooter(s);`  
+좋은 예) `report.appendFooter();`
+
+## 
+
+###
