@@ -138,11 +138,15 @@ ex) `includeSetupAndTeardownPages`, `includeSetupPages`, `includeTeardownPages`
 
 위의 경우가 아니라면 단항 함수는 가급적 피한다.
 
-ex) `void includeSetupPageInto(StringBuffer pateText)` (X) 변환 함수에서 출력 인수를 사용
+나쁜 예) `void includeSetupPageInto(StringBuffer pateText)` 변환 함수에서 출력 인수를 사용
 
 **플래그 인수**
 
 > 함수로 `boolean`값을 넘기는 것은 함수가 한꺼번에 여러 가지를 처리한다고 대놓고 공표하는 셈이다.
+
+각 플래그 값에 따라 별도의 함수를 작성하라.  
+ex) `render(boolean isSuite)` → `renderForSuite()` & `renderForSingleTest()`
+
 
 **이항 함수**
 
@@ -158,5 +162,10 @@ ex) `void includeSetupPageInto(StringBuffer pateText)` (X) 변환 함수에서 �
 나쁜 예) `assertEquals(expected, actual)`  
 좋은 예) `Point p = new Point(0,0);`  
 
+**삼항 함수**
 
+> 부동소수점 비교의 경우에 삼항 함수는 적절하다.
+
+나쁜 예) `assertEquals(message, expected, actual)`  
+좋은 예) `assertEquals(1.0, amount, .001)`
 
