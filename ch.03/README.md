@@ -68,7 +68,7 @@ public Money calculatePay(Employee e) thorws InvalidEmployeeType {
 3. SRP(Single Responsibility Principle)을 위반한다.
 4. OCP(Open Closed Principle)을 위반한다. (새 직원 유형을 추가할 때마다 코드를 변경 해야 한다.)
 5. *위 함수와 구조가 동일한 함수가 무한정 존재한다.*
-Ex. `isPayday(Employee e, Date date)`, `deliverPay(Employee e, Money pay)`
+ex) `isPayday(Employee e, Date date)`, `deliverPay(Employee e, Money pay)`
 
 *해결 - 추상 팩터리에 switch문 꽁꽁 숨기기*
 
@@ -101,8 +101,21 @@ public class EmployeeFactoryImpl implements EmployeeFactory {
 }
 ```
 
+##
+
 ### 📘 서술적인 이름을 사용하라!
 
 > "코드를 읽으면서 짐작했던 기능을 각 루틴이 그대로 수행한다면 깨끗한 코드라 불러도 되겠다."
 
+**한 가지만 하는 작은 함수에 이런저런 이름을 시도한 후 최대한 서술적인 이름을 골라라.**
+
+- 모듈 내에서 함수 이름은 같은 문구, 명사, 동사를 사용한다.
+
+ex) `includeSetupAndTeardownPages`, `includeSetupPages`, `includeTeardownPages`
+
+##
+
+### 📘 함수 인수
+
+> "함수에서 이상적인 인수 개수는 0개다. 다음은 1개고, 다음은 2개다. 3개는 가능한 피하는 편이 좋다. 4개 이상은 특별한 이유가 필요하다."
 
