@@ -119,3 +119,44 @@ ex) `includeSetupAndTeardownPages`, `includeSetupPages`, `includeTeardownPages`
 
 > "함수에서 이상적인 인수 개수는 0개다. 다음은 1개고, 다음은 2개다. 3개는 가능한 피하는 편이 좋다. 4개 이상은 특별한 이유가 필요하다."
 
+- 함수 이름과 인수 사이에 추상화 수준이 다르다.
+- 읽는 사람은 현 시점에서 중요하지 않은 세부사항까지 알아야 한다.
+- 인수 3개가 넘어가면 인수마다 유효한 값으로 모든 조합을 구성해 테스트하기가 부담스러워 진다.
+
+최선은 인수가 없는 경우이며, 차선은 입력 인수가 1개뿐인 경우다.
+
+**단항 형식**
+
+함수에 인수 1개를 넘기는 이유로 가장 흔한 경우는 두 가지이다.
+
+1. 인수에게 질문을 던지는 경우  
+`boolean fileExists("MyFile")`
+2. 인수를 뭔가로 변환해 결과를 반환하는 경우  
+`InputStream fileOpen("MyFile")`
+3. 이벤트 (입력 인수로 시스템 상태를 바꾸는 경우)  
+`passwordAttemptFailedNtimes(int attempts)`
+
+위의 경우가 아니라면 단항 함수는 가급적 피한다.
+
+ex) `void includeSetupPageInto(StringBuffer pateText)` (X) 변환 함수에서 출력 인수를 사용
+
+**플래그 인수**
+
+함수로 `boolean`값을 넘기는 것은 함수가 한꺼번에 여러 가지를 처리한다고 대놓고 공표하는 셈이다.
+
+**이항 함수**
+
+나쁜 예) `writeFile(outputStream, name)`
+
+> 잠시 주춤하며 첫 인수를 무시해야 한다는 사실을 깨닫는다. 그리고 바로 그 사실이 결국 문제를 일으킨다.  
+왜냐고? 어떤 코드든 절대로 무시하면 안 된다. 무시한 코드에 오류가 숨어드니까.
+
+*해결*
+
+`writeField` 메서드를 outputStream 클래스 구성원으로 만들어 `ouputstream.writeFiled(name)`으로 호출한다. 아니면 outputStream을 현재 클래스 구성원 변수로 만들어 인수로 넘기지 않는다.
+
+좋은 예) `Point p = new Point(0,0);`
+
+인수 2개가 한 값을 표현하는 두 요소이고, 그 순서가 자연적인 경우 이항 인수는 적절하다.
+
+
