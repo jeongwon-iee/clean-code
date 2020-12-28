@@ -17,8 +17,8 @@
 🧷 [2장 | 의미 있는 이름](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.02)  
 🧷 [3장 | 함수](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.03)  
 🧷 [4장 | 주석](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.04)     
-🧷 [5장 | 형식 맞추기](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.05)  -- 진행 중 --  
-🧷 [6장 | 객체와 자료 구조](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.06)  
+🧷 [5장 | 형식 맞추기](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.05)    
+🧷 [6장 | 객체와 자료 구조](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.06) -- 진행 중 --  
 🧷 [7장 | 오류 처리](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.07)  
 🧷 [8장 | 경계](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.08)  
 🧷 [9장 | 단위 테스트](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.09)  
