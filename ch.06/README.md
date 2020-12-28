@@ -183,3 +183,13 @@ String outputDir = scratchDir.getAbsolutePath();
 - 공개 변수, 공개 함수, 주요 함수, getter, setter 모두 섞여 있는 구조
 - 클래스, 자료 구조 양쪽에서 단점만 모아 놓은 피해야 할 구조  
 → 새로운 함수는 물론, 새로운 자료 구조도 추가하기 어렵다.
+
+
+**구조체 감추기**
+
+```java
+BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
+```
+
+디렉토리 경로를 얻는 *목적* 은 임시 파일 생성을 위함 → ctxt 객체가 최종 목적인 임시 파일을 생성하도록 명령
+
