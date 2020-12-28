@@ -227,4 +227,121 @@ public class UserValidator {
 
 > 함수는 뭔가를 수행하거나 뭔가에 답하거나 둘 중 하나만 해야 한다. 객체 상태를 변경하거나 객체 정보를 반환하거나 둘 중 하나다.
 
+나쁜 예) `public boolean set(String attribute, String value);`  
+이름이 attribute인 속성을 찾아 값을 value로 설정한 후 성공하면 true, 실패 시 false를 반환하는 메서드  
+→ `if(set(attribute, userName)`으로 코드 사용 시 의미가 모호. "set"이 동사인지 형용사인지 모호.
+
+좋은 예) `if(attributeExists("userName") setAttribute("userName", "unclebob");`  
+*해결 - 명령과 조회를 분리해 혼란을 뿌리 뽑기*
+
+## 
+
+### 📘 오류코드보다 예외를 사용하라!
+
+> 명령 함수에서 오류 코드를 반환하는 방식은 명령/조회 분리 규칙을 위반한다.  
+
+나쁜 예)
+
+```java
+if (deletePage(page) == E_OK)
+```
+
+위 코드는 동사/형용사 혼란을 일으키진 않지만 오류 코드를 반환하면 호출자는 오류 코드를 곧바로 처리해야 하는 문제에 부딪힌다.
+
+좋은 예)
+
+```java
+try {
+	deletePage(page);
+	registry.deleteReference(page.name);
+	configKeys.deleteKey(page.name.makeKey());
+}
+catch (Exception e) {
+	logger.log(e.getMessage());
+}
+```
+
+반면 오류 코드 대신 예외를 사용하면 오류 처리 코드가 원래 코드에서 분리되어 코드가 깔끔해진다.
+
+**Try/Catch 블록 뽑아내기**
+
+> Try/Catch 블록은 별도 함수로 뽑아내지 않으면 코드 구조에 혼란을 일으키며, 정상 동작과 오류 처리 동작을 뒤섞는다.
+
+- Try/Catch 블록을 별도 함수로 뽑아내고, try문 안에서 실제 '작업' 메소드를 호출한다.
+- 실제 '작업'을 하는 코드에서는 thorws Exception하여 모든 예외 처리를 한 곳에서 처리한다.
+
+```java
+public void delete(Page page) {
+	try {
+		deletePageAndAllReferences(page);
+	}
+	catch (Exception e) {
+		logError(e);
+	}
+}
+
+private void deletePageAndAllReferences(Page page) throws Exception {
+		deletePage(page);
+		registry.deleteReference(page.name);
+		configKeys.deleteKey(page.name.makeKey());
+}
+
+private void logError(Exception e) {
+	logger.log(e.getMessage());
+}
+```
+
+`delete`함수는 모든 오류를 처리한다.
+
+페이지를 실제로 제거하는 함수 `deletePageAndAllReferences`는 예외를 처리하지 않는다.
+
+이렇게 정상 동작과 오류 처리 동작을 분리하면 코드를 이해하고 수정하기 쉬워진다.
+
+**오류 처리도 한 가지 작업이다**
+
+> 함수는 '한 가지' 작업만 해야 한다. 오류 처리도 '한 가지' 작업에 속한다.
+
+오류를 처리하는 함수는 오류만 처리해야 마땅하다.
+
+함수에 `try`가 있다면 함수는 `try`로 시작해 `catch`, `finally`로 끝나야 한다.
+
+- 오류 코드를 반환하는 방식은 여러 단계로 중첩되는 코드를 야기한다.
+- 오류 코드를 반환하는 방식은 오류 코드를 곧바로 처리해야 한다는 문제가 발생한다.
+- 오류 코드를 정의하는 의존성 자석(magnet)은 재컴파일/재배치를 요구하기 때문에 번거로워진다.
+
+
+**`[Error.java](http://error.java)` 의존성 자석**
+
+*오류 코드 대신 예외를 사용하면* 새 오류 코드를 추가하는 대신 새 예외는 Exception 클래스에서 파생된다.
+
+##
+
+### 📘 반복하지 마라!
+
+- 코드 길이가 늘어난다.
+- 알고리즘이 변하면 모두 손봐야 한다.
+- 어느 한 곳이라도 빠뜨리면 오류가 발생할 확률이 높아진다.
+
+##
+
+### 📘 구조적 프로그래밍
+
+- 모든 함수와 함수 내 모든 블록에 입구와 출구가 하나만 존재해야 한다.
+- 함수가 아주 클 때 구조적 프로그래밍의 목표와 규율이 효과적이다.
+
+##
+
+### 📘 함수를 짜는 방법?
+
+**SW를 짜는 행위는 글짓기와 비슷하다.**
+
+- 서투른 코드를 빠짐없이 테스트하는 단위 테스트 케이스도 만든다.
+- 코드를 다듬는다.
+- 함수를 만든다.
+- 이름을 바꾼다.
+- 중복을 제거한다.
+- 메서드를 줄이고 순서를 바꾼다.
+- 때로는 전체 클래스를 쪼개기도 한다.
+
+
 
