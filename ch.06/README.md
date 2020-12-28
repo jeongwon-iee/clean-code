@@ -216,3 +216,17 @@ BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
 ***활성 레코드***
 
 공개, 비공개 변수와 getter, setter, 그리고 탐색 함수가 있는 클래스
+
+##
+
+### 📘 결론
+
+**바람직한 구조**
+
+- 객체: 비공개 변수와 공개 함수만 포함
+- 자료 구조: 함수 없이 공개 변수만 포함
+
+**적합한 쓰임**
+
+- 객체: 새로운 자료 타입 추가
+- 자료 구조: 새로운 메소드 추가
