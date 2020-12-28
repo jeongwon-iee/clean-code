@@ -310,7 +310,7 @@ private void logError(Exception e) {
 - 오류 코드를 정의하는 의존성 자석(magnet)은 재컴파일/재배치를 요구하기 때문에 번거로워진다.
 
 
-**`[Error.java](http://error.java)` 의존성 자석**
+**`[Error.java]` 의존성 자석**
 
 *오류 코드 대신 예외를 사용하면* 새 오류 코드를 추가하는 대신 새 예외는 Exception 클래스에서 파생된다.
 
