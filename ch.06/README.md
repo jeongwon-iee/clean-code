@@ -174,3 +174,12 @@ String outputDir = scratchDir.getAbsolutePath();
 
 → ctxt, opts, scratchDir이 객체라면 디미터 법칙 위반  
 → ctxt, opts, scratchDir이 자료 구조라면 내부 구조를 노출하므로 디미터 법칙이 적용되지 않음.
+
+
+**잡종 구조**
+
+절반은 객체, 절반은 자료 구조인 잡종 구조.
+
+- 공개 변수, 공개 함수, 주요 함수, getter, setter 모두 섞여 있는 구조
+- 클래스, 자료 구조 양쪽에서 단점만 모아 놓은 피해야 할 구조  
+→ 새로운 함수는 물론, 새로운 자료 구조도 추가하기 어렵다.
