@@ -111,4 +111,13 @@ public List<RecordedGrip> retrieveSection(String sectionName) {
 
 ##
 
-### 📘 미확인 예외를 사용하라
+### 📘 미확인 예외(Unchecked Exception)를 사용하라
+
+> Checked Exception은 선언부의 수정을 필요로 하기 때문에 모듈의 캡슐화를 깨버린다
+
+| 	| Checked Exception |	 UnChecked Exception
+|:---:|:---:|:---:|
+| 확인 시점 |	컴파일 시점 |	 런타임 시점
+| 처리 여부 |	반드시 처리 |	 명시적으로 처리하지 않아도 됨
+| 트랜잭션 처리 |	roll-back 하지 않음 |	 roll-back 함
+| 예 |	IOException, ClassNotFoundException |	 NullPointerException, ArithmeticException
