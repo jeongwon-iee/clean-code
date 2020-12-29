@@ -64,43 +64,6 @@ public interface Vehicle {
 - 객체는 추상화 뒤로 자료를 숨긴 채 자료를 다루는 함수만 공개한다.
 - 자료 구조는 자료를 그대로 공개하며 별다른 함수는 제공하지 않는다.
 
-*객체 지향적인 도형 클래스*
-
-```java
-public class Square implements Shape {
-	public Point topLeft;
-	public double side;
-
-	public double area() {
-		return side*side;
-	}
-}
-
-public class Rectangle implements Shape {
-	public Point topLeft;
-	public double height;
-	public double width;
-
-	public double area() {
-		return height*width;
-	}
-}
-
-public class Circle implements Shape {
-	public Point center;
-	public double radius;
-	public double width;
-
-	public double area() {
-		return PI*radius*radius;
-	}
-}
-```
-
-`area()`는 다형 메서드다. Geometry 클래스는 필요 없다.  
-새 도형을 추가해도 기존 함수에 아무런 영향을 미치지 않는다!  
-반면 새 함수를 추가하고 싶다면 도형 클래스를 전부 고쳐야 한다!
-
 *절차적인 도형 클래스*
 
 ```java
@@ -145,6 +108,43 @@ Geometry 클래스는 세 가지 도형 클래스를 다룬다. 각 도형 클�
 아무 메서드도 제공하지 않고, 도형이 동작하는 방식은 Geometry 클래스에서 구현한다.  
 만약 Geometry 클래스에 함수를 추가하고 싶다면 도형 클래스는 아무 영향도 받지 않는다!  
 새 도형을 추가하고 싶다면 Geometry 클래스에 속한 함수를 모두 고쳐야 한다!
+
+*객체 지향적인 도형 클래스*
+
+```java
+public class Square implements Shape {
+	public Point topLeft;
+	public double side;
+
+	public double area() {
+		return side*side;
+	}
+}
+
+public class Rectangle implements Shape {
+	public Point topLeft;
+	public double height;
+	public double width;
+
+	public double area() {
+		return height*width;
+	}
+}
+
+public class Circle implements Shape {
+	public Point center;
+	public double radius;
+	public double width;
+
+	public double area() {
+		return PI*radius*radius;
+	}
+}
+```
+
+`area()`는 다형 메서드다. Geometry 클래스는 필요 없다.  
+새 도형을 추가해도 기존 함수에 아무런 영향을 미치지 않는다!  
+반면 새 함수를 추가하고 싶다면 도형 클래스를 전부 고쳐야 한다!
 
 > 자료 구조를 사용하는 절차적인 코드는 기존 자료 구조를 변경하지 않으면서 새 함수를 추가하기 쉽다. 반면, 객체 지향 코드는 기존 함수를 변경하지 않으면서 새 클래스를 추가하기 쉽다.
 
