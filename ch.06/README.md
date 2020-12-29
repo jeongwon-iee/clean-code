@@ -181,6 +181,13 @@ String outputDir = scratchDir.getAbsolutePath();
 → ctxt, opts, scratchDir이 자료 구조라면 내부 구조를 노출하므로 디미터 법칙이 적용되지 않음.
 
 
+```java
+final String outputDir = cxtx.opts.scratchDir.absolutePath;
+```
+
+코드를 위와 같이 구현했다면 디미터 법칙을 거론할 필요가 없어진다.  
+자료구조는 무조건 함수 없이 공개 변수만 포함하고, 객체는 비공개 변수와 공개 함수를 포함한다면 된다.
+
 **잡종 구조**
 
 절반은 객체, 절반은 자료 구조인 잡종 구조.
