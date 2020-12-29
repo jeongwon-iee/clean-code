@@ -16,14 +16,12 @@
 
 *before)*
 
-Sensor라는 객체를 담는 Map을 만드려면 다음과 같이 Map을 생성한다.
-
+Sensor라는 객체를 담는 Map을 만드려면 다음과 같이 Map을 생성한다.  
 ```java
 Map sensors = new HashMap();
 ```
 
-Sensor 객체가 필요한 코드는 다음과 같이 Sensor 객체를 가져온다.
-
+Sensor 객체가 필요한 코드는 다음과 같이 Sensor 객체를 가져온다.  
 ```java
 Sensor s = (Sensor)sensors.get(sensorId);
 ```
