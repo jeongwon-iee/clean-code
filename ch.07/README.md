@@ -78,8 +78,7 @@ public class DeviceController {
 
 ### 📘 Try-Catch-Finally 문부터 작성하라
 
-try문에서 무슨 일이 생기든 catch 블록은 프로그램 상태를 일관성 있게 유지해야 한다.
-
+try문에서 무슨 일이 생기든 catch 블록은 프로그램 상태를 일관성 있게 유지해야 한다.  
 → 예외가 발생할 코드를 짤 때는 try-catch-finally 문으로 시작하는 편이 낫다.
 
 - 파일이 없으면 예외를 던지는지 알아보는 단위 테스트
