@@ -20,8 +20,8 @@
 🧷 [5장 | 형식 맞추기](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.05)    
 🧷 [6장 | 객체와 자료 구조](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.06)   
 🧷 [7장 | 오류 처리](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.07)   
-🧷 [8장 | 경계](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.08) -- 진행 중 --  
-🧷 [9장 | 단위 테스트](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.09)  
+🧷 [8장 | 경계](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.08)   
+🧷 [9장 | 단위 테스트](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.09) -- 진행 중 --  
 🧷 [10장 | 클래스](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.10)  
 🧷 [11장 | 시스템](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.11)  
 🧷 [12장 | 창발성](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.12)  
