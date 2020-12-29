@@ -115,9 +115,21 @@ public List<RecordedGrip> retrieveSection(String sectionName) {
 
 > Checked Exception은 선언부의 수정을 필요로 하기 때문에 모듈의 캡슐화를 깨버린다
 
+안정적인 소프트웨어를 제작하는 요소로 확인된 예외가 반드시 필요하지 않다는 사실이 분명해졌다.
+
 | 	| Checked Exception |	 UnChecked Exception
 |:---:|:---:|:---:|
 | 확인 시점 |	컴파일 시점 |	 런타임 시점
 | 처리 여부 |	반드시 처리 |	 명시적으로 처리하지 않아도 됨
 | 트랜잭션 처리 |	roll-back 하지 않음 |	 roll-back 함
 | 예 |	IOException, ClassNotFoundException |	 NullPointerException, ArithmeticException
+
+최상위 함수가 아래 함수를 호출한다. 아래 함수는 그 아래 함수를 호출한다. 단계를 내려갈수록 호출하는 함수 수는 늘어난다.  
+최하위 함수가 오류를 확인된 오류를 던진다면 함수는 선언부에 `throws`절을 추가해야 한다.  
+그러면 해당 함수를 호출하는 모든 함수가 1) catch 블록에서 새로운 예외를 처리하거나 2) 선언부에 `throws`절을 추가해야 한다.  
+결과적으로 최하위 단계에서 최상위 단계까지 연쇄적인 수정이 일어난다!  
+`throws` 경로에 위치하는 모든 함수가 최하위 함수에서 던지는 예외를 알아야 하므로 캡슐화도 깨진다.
+
+##
+
+
