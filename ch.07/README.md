@@ -2,9 +2,11 @@
 
 깨끗한 코드와 오류 처리는 확실히 연관성이 있다. 
 
-> 상당 수 코드 기반은 여기저기 흩어진 오류 처리 코드 때문에 실제 코드가 하는 일을 파악하기가 거의 불가능하다.
+상당 수 코드 기반은 여기저기 흩어진 오류 처리 코드 때문에 실제 코드가 하는 일을 파악하기가 거의 불가능하다.
 
 오류 처리는 중요하지만, 오류 처리 코드로 인해 프로그램 논리를 이해하기 어려워진다면 깨끗한 코드가 아니다.
+
+> 비지니스 논리와 오류 처리가 잘 분리된 코드를 작성해야 한다.
 
 ##
 
@@ -212,3 +214,92 @@ public class LocalPort {
 2. 나중에 다른 라이브러리로 갈아타도 비용이 적다.  
 3. Wrapper 클래스에서 외부 API를 호출하는 대신 테스트 코드를 넣어주면 테스트 하기도 쉽다.  
 4. 특정 업체가 API를 설계한 방식에 국한되지 않는다. 프로그램이 사용하기 편리한 API를 정의할 수 있다.  
+
+##
+
+### 📘 정상 흐름을 정의하라
+
+**중단이 적합하지 않은 때도 있다. "특수 사례 패턴"으로 클래스를 만들거나 객체를 조작해 특수사례를 처리한다.**
+
+→ 클라이언트 코드가 예외적인 상황을 처리할 필요가 없어진다.
+
+*before)*
+
+```java
+try {
+	MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
+	m_total += expenses.getTotal();
+} catch(MealExpensesNotFound e) {
+	m_total += getMealPerDiem();
+}
+```
+
+*after) 클래스나 객체가 예외적인 상황을 캡슐화 해서 처리한다*
+
+```java
+
+	MealExpenses expenses = expenseReportDAO.getMeals(employee.getID());
+	m_total += expenses.getTotal();
+```
+
+`ExpenseReportDAO`를 고쳐 언제나 MealExpense 객체를 반환하게 한다. 
+청구한 식비가 없다면 일일 기본 식비를 반환하는 MealExpense 객체를 반환한다.
+
+```java
+public class PerDiemMealExpenses implements MealExpenses {
+	public int getTotal() {
+		// 기본값으로 일일 기본 식비를 반환한다.
+	}
+}
+```
+
+##
+
+### 📘 null을 반환하지 마라
+
+**null을 반환하고 이를 `if(object != null)`으로 확인하는 방식은 나쁘다.**
+
+- null 대신 예외를 던지거나 특수 사례 객체(ex. `Collections.emptyList()`)를 반환하라
+- 사용하려는 외부 API가 null을 반환한다면 Wrapper 를 구현해 예외를 던지거나 특수 사례 객체를 반환하라
+
+*before)*
+
+```java
+List<Employee> employees = getEmployees();
+if (employees != null) {
+	for(Employee e : employees) {
+		totalPay += e.getPay();
+	}
+}
+```
+
+*after) `getEmployees`가 null 대신 빈 리스트를 반환한다.*
+
+```java
+List<Employee> employees = getEmployees();
+for(Employee e : employees) {
+	totalPay += e.getPay();
+}
+```
+
+**자바의 `Collections.emptyList()`**
+
+```java
+public List<Employee> getEmployees() {
+	if ( ...직원이 없다면... ) {
+		return Collections.emptyList();
+	}
+}
+```
+
+: 코드도 깔끔해지며 NullPointerException이 발생할 가능성도 줄어든다.
+
+##
+
+### 📘 null을 전달하지 마라
+
+메서드에서 null을 반환하는 방식도 나쁘지만 null을 전달하는 방식은 더 나쁘다.
+
+- 예외를 던지거나 assert 문을 사용할 수는 있다.
+- 하지만 애초에 null을 전달하는 경우는 금지하는 것이 바람직하다.
+
