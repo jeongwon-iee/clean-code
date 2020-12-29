@@ -203,7 +203,8 @@ final String outputDir = cxtx.opts.scratchDir.absolutePath;
 BufferedOutputStream bos = ctxt.createScratchFileStream(classFileName);
 ```
 
-디렉토리 경로를 얻는 *목적* 은 임시 파일 생성을 위함 → ctxt 객체가 최종 목적인 임시 파일을 생성하도록 명령
+디렉토리 경로를 얻는 *목적* 은 임시 파일 생성을 위함 → ctxt 객체가 최종 목적인 임시 파일을 생성하도록 명령  
+ctxt 객체는 내부구조를 드러내지 않으며, 함수는 자신이 몰라야 하는 여러 객체를 탐색할 필요가 없다.  
 
 ##
 
