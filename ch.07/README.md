@@ -132,4 +132,83 @@ public List<RecordedGrip> retrieveSection(String sectionName) {
 
 ##
 
+### 📘 예외에 의미를 제공하라
 
+> **예외를 던질 때는 전후 상황을 충분히 덧붙인다. 그러면 오류가 발생한 원인과 위치를 찾기가 쉬워진다.**
+
+- 호출 스택으로는 오류에 대한 정보가 부족하다
+- 오류 메세지에 정보(실패한 연산 이름, 실패 유형 등)를 충분히 추가한다
+
+##
+
+### 📘 호출자를 고려해 예외 클래스를 정의하라
+
+> **오류를 정의해 분류하는 방법은 프로그래머에게 *오류를 잡아내는 방법* 이 되어야 한다.**
+
+잘못된 예) 오류를 형편없이 분류한 사례
+
+```java
+ACMEPort port = new ACMEPort(12);
+
+try{
+	  port.open();
+} catch (DeviceResponseException e) {
+		reportPortError(e);
+} catch (ATM1212UnlockedException e) {
+		reportPortError(e);
+} catch (GMXError e) {
+		reportPortError(e);
+} finally {
+	...
+}
+```
+
+*해결 - 호출하는 라이브러리의 API를 감싸면서 예외 유형을 하나 반환한다.*
+
+```java
+LocalPort port = new LocalPort(12);
+try {
+  port.open();
+} catch (PortDeviceFailure e) {
+  reportError(e);
+  logger.log(e.getMessage(), e);
+} finally {
+  ...
+}
+```
+
+```java
+
+public class LocalPort {
+  private ACMEPort innerPort;
+  
+  public LocalPort(int portNumber) {
+    innerPort = new ACMEPort(portNumber);
+  }
+  
+  public void open() {
+    try{
+      innerPort.open();
+    } catch (DeviceResponseException e) {
+      throw new PortDeviceFailure(e);
+    } catch (ATM1212UnlockedException e) {
+      throw new PortDeviceFailure(e);
+    } catch (GMXError e) {
+      throw new PortDeviceFailure(e);
+    }
+  }
+  
+  ...
+}
+```
+
+`LocalPort`는 ACMEPort 클래스가 던지는 예외를 잡아 변환하는 Wrapper 클래스이다.
+
+**Wrapper 클래스로 예외 호출 라이브러리 API를 감싸면 좋은 점**
+
+> 외부 API를 사용할 때는 Wrapper 클래스 기법이 최선이다.
+
+1. 외부 API를 감싸면 외부 라이브러리와 프로그램 사이에 의존성이 크게 줄어든다.  
+2. 나중에 다른 라이브러리로 갈아타도 비용이 적다.  
+3. Wrapper 클래스에서 외부 API를 호출하는 대신 테스트 코드를 넣어주면 테스트 하기도 쉽다.  
+4. 특정 업체가 API를 설계한 방식에 국한되지 않는다. 프로그램이 사용하기 편리한 API를 정의할 수 있다.  
