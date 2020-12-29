@@ -15,7 +15,7 @@
 조회 함수와 설정함수로 변수를 다룬다고 클래스가 되지는 않는다.  
 *추상 인터페이스를 제공해 사용자가 구현을 모른 채 자료의 핵심을 조작할 수 있어야 진정한 클래스다.*  
 
-- 구체적인 Point 클래스
+- 구체적인 Point 클래스 (구현을 외부로 노출)
 
 ```java
 public class Point {
@@ -24,7 +24,7 @@ public class Point {
 }
 ```
 
-- 추상적인 Point 클래스 (더 좋음)
+- 추상적인 Point 클래스 (구현을 완전히 숨김)
 
 ```java
 public interface Point {
@@ -37,7 +37,7 @@ public interface Point {
 }
 ```
 
-- 구체적인 Vehicle 클래스
+- 구체적인 Vehicle 클래스 (구현을 외부로 노출)
 
 ```java
 public interface Vehicle {
@@ -46,7 +46,7 @@ public interface Vehicle {
 }
 ```
 
-- 추상적인 Vehicle 클래스 (더 좋음)
+- 추상적인 Vehicle 클래스 (구현을 완전히 숨김)
 
 ```java
 public interface Vehicle {
