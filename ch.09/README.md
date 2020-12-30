@@ -105,4 +105,29 @@ public String getState() {
 
 ##
 
+### 📘 테스트 당 assert 하나
 
+> assert 문이 단 하나인 함수는 결론이 하나라서 코드를 이해하기 쉽고 빠르다.
+
+테스트를 여러 개로 쪼개 각자가 assert를 수행해도 좋다.
+
+```java
+public void testGetPageHierarchyAsWml() throws Exception {
+	givenPages("PageOne", "PageOne.ChildOne", "PageTwo");
+
+	whenRequestIsIssued("root", "type:pages");
+
+	thenResponseShouldBeXML();
+}
+```
+
+위에선 함수 이름을 바꿔 *given-when-then* 관례를 사용했다. 그러면 테스트 코드를 읽기가 쉬워진다.
+
+##
+
+### 📘 테스트 당 개념 하나
+
+> 테스트 함수마다 한 개념만 테스트 하라
+
+- 개념 당 assert문을 최소로 줄여라
+- 테스트 함수 하나는 개념 하나만 테스트 하라
