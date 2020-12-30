@@ -28,3 +28,21 @@
 1. 테스트 자료 만들기
 2. 테스트 자료 조작하기
 3. 조작한 결과가 올바른지 확인하기
+
+```java
+public void testGetPageHierarchyAsWml() throws Exception {
+	makePages("PageOne", "PageOne.ChildOne", "PageTwo");
+
+	submitRequest("root", "type:pages");
+
+	assertResponseIsXML();
+	assertResponseContains(
+		"<name>PageOne</name>", "<name>PageTwo</name>", "<name>ChildOne</name>"
+	);
+}
+```
+
+*BUILD-OPERATE-CHECK* 패턴이 적합한 테스트 구조다.
+
+각 테스트는 명확히 세 부분으로 나눠진다. 첫 부분은 테스트 자료를 만든다. 두 번째 부분은 테스트 자료를 조작하며, 세 번째 부분은 조작한 결과가 올바른지 확인한다.
+
