@@ -119,9 +119,8 @@ public void testGetPageHierarchyAsWml() throws Exception {
 
 	thenResponseShouldBeXML();
 }
-```
-
-위에선 함수 이름을 바꿔 *given-when-then* 관례를 사용했다. 그러면 테스트 코드를 읽기가 쉬워진다.
+```  
+위에선 함수 이름을 바꿔 *given-when-then* 관례를 사용했다. 그러면 테스트 코드를 읽기가 쉬워진다.  
 
 ##
 
