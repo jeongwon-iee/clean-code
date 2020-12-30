@@ -85,4 +85,24 @@ public void testGetPageHierarchyAsWml() throws Exception {
 '그릇된 정보를 피하라' 규칙의 위반에 가깝지만, **의미만 안다면 결과를 재빨리 판단할 수 있다.**  
 테스트 코드를 이해하기 너무도 쉽다는 사실이 드러난다.
 
+```java
+public String getState() {
+	String state = "";
+	state += heater ? "H" : "h";
+	state += blower ? "B" : "b";
+	state += cooler ? "C" : "c";
+	state += hiTempAlarm ? "H" : "h";
+	state += loTempAlarm ? "L" : "l";
+	return state;
+}
+```
+
+효율을 높이려면 StringBuffer가 더 적합하지만, *StringBuffer는 보기 흉하다.*
+
+테스트 환경은 컴퓨터 자원과 메모리가 제한적일 가능성이 낮다.  
+실제 환경에선 안 되지만 테스트 환경에선 문제 없는 방식이 있다. 대개 메모리나 CPU 효율과 관련 있는 경우다.  
+코드의 깨끗함과는 철저히 무관하다.
+
+##
+
 
