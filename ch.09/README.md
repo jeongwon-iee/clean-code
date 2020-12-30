@@ -47,7 +47,7 @@ public void testGetPageHierarchyAsWml() throws Exception {
 첫 부분은 테스트 자료를 만든다. 두 번째 부분은 테스트 자료를 조작하며, 세 번째 부분은 조작한 결과가 올바른지 확인한다.  
 > *API 위에다 함수와 유틸리티를 구현* 한 후 그 함수와 유틸리티를 사용하므로 테스트 코드를 짜기도, 읽기도 쉽다.
 
-**이중 표준**
+- **이중 표준**
 
 > 테스트 API에 적용하는 표준은 실제 코드에 적용하는 표준과 다르다.
 
@@ -55,3 +55,34 @@ public void testGetPageHierarchyAsWml() throws Exception {
 
 실제 환경과 테스트 환경은 요구사항이 다르기 때문이다.
 
+```java
+@Test
+	public void turnOnCoolerAndBlowerIfTooHot() throws Exception {
+		tooHot();
+		assertEquals("hBChl", hw.getState();
+	}
+
+@Test
+	public void turnOnHeaterAndBlowerIfTooCold() throws Exception {
+		wayTooCold();
+		assertEquals("HBchl", hw.getState();
+	}
+
+@Test
+	public void turnOnHiTempAlarmAtThreshold() throws Exception {
+		wayTooHot();
+		assertEquals("hBCHl", hw.getState();
+	}
+
+@Test
+	public void turnOnLoTempAlarmAtThreshold() throws Exception {
+		wayTooCold();
+		assertEquals("HBchL", hw.getState();
+	}
+```
+
+이상한 문자열에서 대문자는 켜짐, 소문자는 꺼짐을 나타낸다. 
+
+'그릇된 정보를 피하라' 규칙의 위반에 가깝지만, 의미만 안다면 결과를 재빨리 판단할 수 있다.
+
+테스트 코드를 이해하기 너무도 쉽다는 사실이 드러난다.
