@@ -42,3 +42,66 @@ SRP(Single Responsibility Principle)를 준수하는 클래스는 테스트가 �
 ##
 
 ### 📘 원칙 2. 중복을 없애라
+
+> 중복은 추가 작업, 추가 위험, 불필요한 복잡도를 뜻한다.  
+깔끔한 시스템을 만들려면 단 몇 줄이라도 중복을 제거하겠다는 의지가 필요하다.
+
+```java
+public void scaleToOneDimension(
+		float desiredDimension, float imageDimension) {
+	if (Math.abs(desiredDimension - imageDimension) < errorThreshold)
+		return;
+
+	float scalingFactor = desiredDimension / imageDimension;
+	scalingFactor = (float)(Math.floor(scalingFactor * 100) * 0.01f);
+	
+	RendoredOp newImage = ImageUtilities.getScaledImage(
+			image, scalingFactor, scalingFactor);
+	image.dispose();
+	System.gc();
+	image = newImage;
+}
+
+public synchronized void rotate(int degrees) {
+	RenderedOp newImage = ImageUtilities.getRotatedImage(image, degrees);
+	image.dispose();
+	System.gc();
+	image = newImage;
+}
+```
+
+`scaleToOneDimension` 메서드와 `rotate` 메서드는 일부 코드가 동일하다.  
+아래와 같이 코드를 정리해 중복을 제거한다.
+
+```java
+public void scaleToOneDimension(
+		float desiredDimension, float imageDimension) {
+	if (Math.abs(desiredDimension - imageDimension) < errorThreshold)
+		return;
+
+	float scalingFactor = desiredDimension / imageDimension;
+	scalingFactor = (float)(Math.floor(scalingFactor * 100) * 0.01f);
+	
+	RendoredOp newImage = ImageUtilities.getScaledImage(
+			image, scalingFactor, scalingFactor);
+	replaceImage(newImage);
+}
+
+public synchronized void rotate(int degrees) {
+	RenderedOp newImage = ImageUtilities.getRotatedImage(image, degrees);
+	replaceImage(newImage);
+}
+
+private void replaceImage(RenderedOp newImage) {
+	image.dispose();
+	System.gc();
+	image = newImage;
+}
+```
+
+아주 적은 양이지만 공통적인 코드를 새 메서드로 뽑고 보니 클래스가 SRP를 위반한다.  
+그러므로 새로 만든 `replaceImage` 메서드를 다른 클래스로 옮겨도 좋겠다.
+그러면 새 메서드의 가시성이 높아진다.
+
+이런 '소규모 재사용'은 시스템 복잡도를 극적으로 줄여준다.
+
