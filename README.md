@@ -22,8 +22,8 @@
 🧷 [7장 | 오류 처리](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.07)   
 🧷 [8장 | 경계](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.08)   
 🧷 [9장 | 단위 테스트](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.09)   
-🧷 [10장 | 클래스](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.10) -- 진행 중 --  
-🧷 [11장 | 시스템](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.11)  
+🧷 [10장 | 클래스](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.10)   
+🧷 [11장 | 시스템](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.11) -- 진행 중 --   
 🧷 [12장 | 창발성](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.12)  
 🧷 [13장 | 동시성](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.13)  
 🧷 [14장 | 점진적인 개선](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.14)  
