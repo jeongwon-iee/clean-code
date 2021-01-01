@@ -11,7 +11,7 @@
 
 ## 
 
-### 🔖 Index
+### 🔖 Index 
 
 🧷 [1장 | 깨끗한 코드](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.01)  
 🧷 [2장 | 의미 있는 이름](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.02)  
