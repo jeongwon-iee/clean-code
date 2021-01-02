@@ -243,3 +243,29 @@ ex) `Object.wait()`, `Object.sleep()`, `Object.yield()`, `Object.priority()`
 
 ### 방법 1. 직접 구현하기
 
+코드에다 직접 `wait()`, `sleep()`, `yield()`, `priority()`를 추가한다.  
+까다로운 코드를 테스트할 때 적합하다.
+
+ex)
+
+```java
+public synchronized String nextUrlOrNull() {
+	if(hasNext()) {
+		String url = urlGenerator.next();
+		Thread.yield(); // 테스트를 위해 추가
+		updateHasNext();
+		return url;
+	}
+	return null;
+}
+```
+
+`yield()`를 삽입하면 코드가 실행되는 경로가 바뀐다. 이전에 실패하지 않았던 코드가 실패할 가능성을 열어준다.  
+코드가 실패한다면 `yield()`를 추가했기 때문이 아니다. 원래 잘못된 코드인데 증거가 드러났을 뿐이다.
+
+### 방법 2. 자동화
+
+> jiggle(흔들기) 기법을 사용해 오류를 찾아내라.
+
+`ThreadJigglePoing.jiggle()` 호출은 무작위로 sleep이나 yield를 호출한다.
+
