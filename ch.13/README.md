@@ -132,6 +132,7 @@ critical section의 수를 줄이는 기술이 중요하다.
 `ConcurrentHashMap`은 거의 모든 상황에서 HashMap보다 빠르다.  
 동시 읽기/쓰기를 지원하며, 자주 사용하는 복합 연산을 다중 스레드 상에서 안전하게 만든 메서드로 제공한다.
 
+|||
 |:---|:---|
 | ReentrantLock | 한 메서드에서 잠그고 다른 메서드에서 푸는 락(lock)이다. |
 | Semaphore | 전형적인 세마포어다. 개수(count)가 있는 락이다. |
