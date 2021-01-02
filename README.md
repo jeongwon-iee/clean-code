@@ -25,8 +25,8 @@
 🧷 [10장 | 클래스](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.10)   
 🧷 [11장 | 시스템](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.11) (미완성)   
 🧷 [12장 | 창발성](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.12)   
-🧷 [13장 | 동시성](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.13) <-- 진행 중 -->  
-🧷 [14장 | 점진적인 개선](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.14)  
+🧷 [13장 | 동시성](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.13)   
+🧷 [14장 | 점진적인 개선](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.14) <-- 진행 중 -->  
 🧷 [15장 | JUnit 들여다 보기](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.15)  
 🧷 [16장 | SerialDate 리팩터링](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.16)  
 🧷 [17장 | 냄새와 휴리스틱](https://github.com/jeongwon-iee/CleanCode/tree/main/ch.17)  
