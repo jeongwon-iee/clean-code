@@ -119,7 +119,7 @@ critical section의 수를 줄이는 기술이 중요하다.
 - 가능하면 스레드가 차단(blocking)되지 않는 방법을 사용한다.
 - 일부 클래스 라이브러리는 스레드에 안전하지 못하다.
 
-***스레드 환경에 안전한 컬렉션***
+***스레드 환경에 안전한 컬렉션 `java.util.concurrent`***
 
 `java.util.concurrent`패키지가 제공하는 클래스는 다중 스레드 환경에서 사용해도 안전하며, 성능도 좋다.  
 `ConcurrentHashMap`은 거의 모든 상황에서 HashMap보다 빠르다.  
