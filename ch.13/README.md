@@ -131,3 +131,6 @@ critical section의 수를 줄이는 기술이 중요하다.
 `java.util.concurrent`패키지가 제공하는 클래스는 다중 스레드 환경에서 사용해도 안전하며, 성능도 좋다.  
 `ConcurrentHashMap`은 거의 모든 상황에서 HashMap보다 빠르다.  
 동시 읽기/쓰기를 지원하며, 자주 사용하는 복합 연산을 다중 스레드 상에서 안전하게 만든 메서드로 제공한다.
+
+|:---|:---:|
+| ReentrantLock | 한 
