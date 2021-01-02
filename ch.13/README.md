@@ -112,6 +112,13 @@ critical section의 수를 줄이는 기술이 중요하다.
 
 ### 📘 라이브러리를 이해하라
 
+> 언어가 제공하는 클래스를 검토하라.  
+자바에서는  
+`java.util.concurrent`  
+`java.util.concurrent.atomic`  
+`java.util.concurrent.locks`  
+를 익혀라.
+
 자바 5로 스레드 코드를 구현한다면 고려해야 할 것들
 
 - 스레드 환경에 안전한 컬렉션을 사용한다. (자바 5부터 제공)
