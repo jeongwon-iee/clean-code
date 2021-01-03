@@ -297,4 +297,11 @@ public class ArgsException extends Exception {
   }
 }
 ```
+이름을 붙인 방법, 함수 크기, 코드 형식에 각별히 주목해 읽어보길 바란다.
+
+예를 들어, 날짜 인수나 복소수 인수 등 새로운 인수 유형을 추가하는 방법이 명백하다. 고칠 코드도 별로 없다.  
+ArgumentMarshaler에서 새 클래스를 파생해 getXXX 함수를 추가한 후 parseSchemaElement 함수에 새 case 문만 추가하면 끝이다.
+
+##
+
 
