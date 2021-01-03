@@ -12,3 +12,27 @@
 
 ##
 
+### 📘 간단한 Args 사용법
+
+```java
+public static void main(String[] args) {
+	try {
+		Args arg = new Args("l,p#,d*", args);
+		boolean logging = arg.getBoolean('l');
+		int port = arg.getInt('p');
+		String directory = arg.getString('d');
+		executeAppliocation(logging, port, directory);
+	} catch (ArgsException e) {
+		System.out.printf("Argument error: %s\n", e.errorMessage());
+	}
+}
+```
+
+Args 클래스의 첫째 매개변수는 형식 또는 스키마를 지정한다. 이 문자열은 명령행 인수 세 개를 정의한다.  
+첫 번째 -l은 부울 인수다. 두 번째 -p는 정수 인수다. 세 번째 -d는 answkduf dlstnek.   
+Args 생성자로 넘긴 둘째 매개변수는 main으로 넘어온 명령행 인수 배열 자체다.
+
+생성자에서 ArgsException이 발생하지 않으면 명령행 인수의 구문을 성공적으로 분석했으며 Args 인스턴스에 질의를 던져도 좋다. 인수 값을 가져오려면 `getBoolean`, `getInteger`, `getString` 등을 이용한다.  
+
+##
+
