@@ -36,3 +36,183 @@ Args 생성자로 넘긴 둘째 매개변수는 main으로 넘어온 명령행 �
 
 ##
 
+### 📘 Args 구현
+
+```java
+import static com.objectmentor.utilities.args.ArgsException.ErrorCode.*;
+
+public class Args {
+	private Map<Character, ArgumentMarshaler> marshalers;
+	private Set<Character> argsFound;
+	private ListIterator<String> currentArgument;
+
+	public Args(String schema, String[] args) throws ArgsException {
+		marshalers = new HashMap<Character, ArgumentMarshaler>();
+		argsFound = new HashSet<Character>();
+    
+    parseSchema(schema);
+    parseArgumentStrings(Arrays.asList(args)); 
+  }
+  
+  private void parseSchema(String schema) throws ArgsException { 
+    for (String element : schema.split(","))
+      if (element.length() > 0) 
+        parseSchemaElement(element.trim());
+  }
+  
+  private void parseSchemaElement(String element) throws ArgsException { 
+    char elementId = element.charAt(0);
+    String elementTail = element.substring(1); validateSchemaElementId(elementId);
+    if (elementTail.length() == 0)
+      marshalers.put(elementId, new BooleanArgumentMarshaler());
+    else if (elementTail.equals("*")) 
+      marshalers.put(elementId, new StringArgumentMarshaler());
+    else if (elementTail.equals("#"))
+      marshalers.put(elementId, new IntegerArgumentMarshaler());
+    else if (elementTail.equals("##")) 
+      marshalers.put(elementId, new DoubleArgumentMarshaler());
+else if (elementTail.equals("[*]"))
+      marshalers.put(elementId, new StringArrayArgumentMarshaler());
+    else
+      throw new ArgsException(INVALID_ARGUMENT_FORMAT, elementId, elementTail);
+  }
+  
+  private void validateSchemaElementId(char elementId) throws ArgsException { 
+    if (!Character.isLetter(elementId))
+      throw new ArgsException(INVALID_ARGUMENT_NAME, elementId, null); 
+  }
+  
+  private void parseArgumentStrings(List<String> argsList) throws ArgsException {
+    for (currentArgument = argsList.listIterator(); currentArgument.hasNext();) {
+      String argString = currentArgument.next(); 
+      if (argString.startsWith("-")) {
+        parseArgumentCharacters(argString.substring(1)); 
+      } else {
+        currentArgument.previous();
+        break; 
+      }
+    } 
+  }
+  
+  private void parseArgumentCharacters(String argChars) throws ArgsException { 
+    for (int i = 0; i < argChars.length(); i++)
+      parseArgumentCharacter(argChars.charAt(i)); 
+  }
+  
+  private void parseArgumentCharacter(char argChar) throws ArgsException { 
+    ArgumentMarshaler m = marshalers.get(argChar);
+    if (m == null) {
+      throw new ArgsException(UNEXPECTED_ARGUMENT, argChar, null); 
+    } else {
+      argsFound.add(argChar); 
+      try {
+        m.set(currentArgument); 
+      } catch (ArgsException e) {
+        e.setErrorArgumentId(argChar);
+        throw e; 
+      }
+    } 
+  }
+  
+  public boolean has(char arg) { 
+    return argsFound.contains(arg);
+  }
+  
+  public int nextArgument() {
+    return currentArgument.nextIndex();
+  }
+  
+  public boolean getBoolean(char arg) {
+    return BooleanArgumentMarshaler.getValue(marshalers.get(arg));
+  }
+  
+  public String getString(char arg) {
+    return StringArgumentMarshaler.getValue(marshalers.get(arg));
+  }
+  
+  public int getInt(char arg) {
+    return IntegerArgumentMarshaler.getValue(marshalers.get(arg));
+  }
+  
+  public double getDouble(char arg) {
+    return DoubleArgumentMarshaler.getValue(marshalers.get(arg));
+  }
+  
+  public String[] getStringArray(char arg) {
+    return StringArrayArgumentMarshaler.getValue(marshalers.get(arg));
+  } 
+}
+```
+
+여기저기 뒤적일 필요 없이 위에서 아래로 코드가 읽힌다.  
+주의 깊게 읽었다면 ArgumentMarshaler 인터페이스가 무엇이며 파생 클래스가 무슨 기능을 하는지 안다.
+
+##
+
+```java
+public interface ArgumentMarshaler {
+  void set(Iterator<String> currentArgument) throws ArgsException;
+}
+```
+
+```java
+public class BooleanArgumentMarshaler implements ArgumentMarshaler { 
+  private boolean booleanValue = false;
+  
+  public void set(Iterator<String> currentArgument) throws ArgsException { 
+    booleanValue = true;
+  }
+  
+  public static boolean getValue(ArgumentMarshaler am) {
+    if (am != null && am instanceof BooleanArgumentMarshaler)
+      return ((BooleanArgumentMarshaler) am).booleanValue; 
+    else
+      return false; 
+  }
+}
+
+public class StringArgumentMarshaler implements ArgumentMarshaler { 
+  private String stringValue = "";
+  
+  public void set(Iterator<String> currentArgument) throws ArgsException { 
+    try {
+      stringValue = currentArgument.next(); 
+    } catch (NoSuchElementException e) {
+      throw new ArgsException(MISSING_STRING); 
+    }
+  }
+  
+  public static String getValue(ArgumentMarshaler am) {
+    if (am != null && am instanceof StringArgumentMarshaler)
+      return ((StringArgumentMarshaler) am).stringValue; 
+    else
+      return ""; 
+  }
+}
+
+public class IntegerArgumentMarshaler implements ArgumentMarshaler { 
+  private int intValue = 0;
+  
+  public void set(Iterator<String> currentArgument) throws ArgsException { 
+    String parameter = null;
+    try {
+      parameter = currentArgument.next();
+      intValue = Integer.parseInt(parameter);
+    } catch (NoSuchElementException e) {
+      throw new ArgsException(MISSING_INTEGER);
+    } catch (NumberFormatException e) {
+      throw new ArgsException(INVALID_INTEGER, parameter); 
+    }
+  }
+  
+  public static int getValue(ArgumentMarshaler am) {
+    if (am != null && am instanceof IntegerArgumentMarshaler)
+      return ((IntegerArgumentMarshaler) am).intValue; 
+    else
+    return 0; 
+  }
+}
+```
+
+##
+
